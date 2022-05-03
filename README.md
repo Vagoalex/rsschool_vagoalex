@@ -5,7 +5,8 @@
 # My projects:
 
 - Shelter:
-  - *https://vagoalex.github.io/rsschool_vagoalex/shelter/pages/main/*
+  <!-- - *https://vagoalex.github.io/rsschool_vagoalex/shelter/pages/main/* -->
+  - in progress...
 
 #### vagoalex-JSFE2022Q1
 
