@@ -17,7 +17,7 @@
 .language_circle {
   width: 20px;
   height: 20px;
-  background: url("../../../../assets/icons/language_eng.png");
+  background: url("../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/language_eng.png");
   margin: 0 5px;
   position: absolute;
   left: 0;
@@ -95,6 +95,14 @@
   height: 100%;
 }
 
+.keyboard-keys {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -129,7 +137,7 @@
 }
 
 .backspace_key {
-  width: 120px;
+  width: 116px;
 }
 
 .tab_key {
@@ -137,7 +145,7 @@
 }
 
 .splash_key {
-  width: 90px;
+  width: 86px;
 }
 
 .caps-lock_key {
@@ -145,20 +153,24 @@
 }
 
 .enter_key {
-  width: 128px;
+  width: 127px;
 }
 
 .shift_key {
   width: 88px;
 }
 
+.ctrl_left {
+  margin-left: 5px;
+}
+
 .space_key {
-  max-width: 456px;
+  max-width: 455px;
   width: 100%;
 }
 
 .arrow_up {
-  background: url("../../../../assets/icons/arrow_up.png");
+  background: url("../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/arrow_up.png");
   background-color: #fff;
   margin: 4px;
   -webkit-transition: 0.2s;
@@ -169,7 +181,7 @@
 }
 
 .arrow_down {
-  background: url("../../../../assets/icons/arrow_down.png");
+  background: url("../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/arrow_down.png");
   background-color: #fff;
   margin: 4px;
   -webkit-transition: 0.2s;
@@ -180,7 +192,7 @@
 }
 
 .arrow_left {
-  background: url("../../../../assets/icons/arrow_left.png");
+  background: url("../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/arrow_left.png");
   background-color: #fff;
   margin: 4px;
   -webkit-transition: 0.2s;
@@ -191,7 +203,7 @@
 }
 
 .arrow_right {
-  background: url("../../../../assets/icons/arrow_right.png");
+  background: url("../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/arrow_right.png");
   background-color: #fff;
   margin: 4px;
   -webkit-transition: 0.2s;
@@ -230,7 +242,7 @@ body.active {
 
 .language_circle.active {
   left: 60%;
-  background: url("../../../../assets/icons/language_rus.png");
+  background: url("../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/language_rus.png");
 }
 
 .keyboard-wrapper.active {
