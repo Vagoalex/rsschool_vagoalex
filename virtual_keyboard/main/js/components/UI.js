@@ -1,4 +1,4 @@
-const UI = {
+export const UI = {
 	keys: document.querySelectorAll('.keys'),
 	spaceKey: document.querySelector('.space_key'),
 	shift_left: document.querySelector('.shift_left'),
@@ -8,7 +8,8 @@ const UI = {
 	night_mode: document.querySelector('.night_mode'),
 	body: document.querySelector('body'),
 	text_input: document.querySelector('.text'),
-	change_color: document.querySelector('change_light-color'),
-	colors: document.querySelector('colors__input'),
-	keyboard_wrapper: document.querySelector('keyboard-wrapper'),
+	change_color: document.querySelector('.change_light-color'),
+	keyboard_lights: document.querySelector('.keyboard_lights'),
+	colors: document.querySelector('.colors__input'),
+	keyboard_wrapper: document.querySelector('.keyboard-wrapper'),
 };
