@@ -1,151 +1,28 @@
-import { UI } from './components/UI.js';
+import { createWindowElements, createKeyboardElements } from './components/helpers.js';
+import { UI, rusLayout, engLayout } from './components/UI.js';
 
-const rusLayout = [
-	'ё',
-	1,
-	2,
-	3,
-	4,
-	5,
-	6,
-	7,
-	8,
-	9,
-	0,
-	'-',
-	'=',
-	'Backspace',
-	'Tab',
-	'й',
-	'ц',
-	'у',
-	'к',
-	'е',
-	'н',
-	'г',
-	'ш',
-	'щ',
-	'з',
-	'х',
-	'ъ',
-	'/',
-	'Caps Lock',
-	'ф',
-	'ы',
-	'в',
-	'а',
-	'п',
-	'р',
-	'о',
-	'л',
-	'д',
-	'ж',
-	'э',
-	'Enter',
-	'Shift',
-	'я',
-	'ч',
-	'с',
-	'м',
-	'и',
-	'т',
-	'ь',
-	'б',
-	'ю',
-	'.',
-	'Shift',
-	'Up',
-	'Ctrl',
-	'Win',
-	'Alt',
-	'Space',
-	'Alt',
-	'Ctrl',
-	'Left',
-	'Down',
-	'Right',
-];
+// Start App;
+(() => {
+	createWindowElements();
+	createKeyboardElements(engLayout);
+})();
 
-const engLayout = [
-	'`',
-	1,
-	2,
-	3,
-	4,
-	5,
-	6,
-	7,
-	8,
-	9,
-	0,
-	'-',
-	'=',
-	'Backspace',
-	'Tab',
-	'q',
-	'w',
-	'e',
-	'r',
-	't',
-	'y',
-	'u',
-	'i',
-	'o',
-	'p',
-	'[',
-	']',
-	'/',
-	'Caps Lock',
-	'a',
-	's',
-	'd',
-	'f',
-	'g',
-	'h',
-	'j',
-	'k',
-	'l',
-	';',
-	"'",
-	'Enter',
-	'Shift',
-	'z',
-	'x',
-	'c',
-	'v',
-	'b',
-	'n',
-	'm',
-	',',
-	'.',
-	'/',
-	'Shift',
-	'Up',
-	'Ctrl',
-	'Win',
-	'Alt',
-	'Space',
-	'Alt',
-	'Ctrl',
-	'Left',
-	'Down',
-	'Right',
-];
-
-UI.night_mode.addEventListener('click', () => {
-	UI.toggle_circle.classList.toggle('active');
-	UI.body.classList.toggle('active');
-	UI.night_mode.classList.toggle('active');
-	UI.keyboard_wrapper.classList.toggle('active');
-	UI.text_input.classList.toggle('active');
-	UI.change_color.classList.toggle('active');
-	for (let i = 0; i < UI.keys.length; i++) {
-		UI.keys.classList.toggle('keys_night');
-	}
-});
-UI.colors.addEventListener('input', () => {
-	for (let i = 0; i < UI.keys.length; i++) {
-		UI.keys[i].style.color = UI.colors.value;
-	}
-	UI.keyboard_lights.style.background = UI.colors.value;
-});
+console.log(UI.night_mode);
+// UI.night_mode.addEventListener('click', () => {
+// 	UI.toggle_circle.classList.toggle('active');
+// 	UI.body.classList.toggle('active');
+// 	UI.language_mode.classList.toggle('active');
+// 	UI.night_mode.classList.toggle('active');
+// 	UI.keyboard_wrapper.classList.toggle('active');
+// 	UI.text_input.classList.toggle('active');
+// 	UI.change_color.classList.toggle('active');
+// 	for (let i = 0; i < UI.keys.length; i++) {
+// 		UI.keys[i].classList.toggle('keys_night');
+// 	}
+// });
+// UI.colors.addEventListener('input', () => {
+// 	for (let i = 0; i < UI.keys.length; i++) {
+// 		UI.keys[i].style.color = UI.colors.value;
+// 	}
+// 	UI.keyboard_lights.style.background = UI.colors.value;
+// });
