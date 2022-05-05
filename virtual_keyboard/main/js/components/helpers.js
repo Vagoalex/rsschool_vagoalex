@@ -3,6 +3,7 @@ import { UI } from '../main.js';
 export function changeColor() {
 	for (let i = 0; i < UI.keys.length; i++) {
 		UI.keys[i].style.color = UI.colors.value;
+		UI.keys[i].style.fill = UI.colors.value;
 	}
 	UI.keyboard_lights.style.background = UI.colors.value;
 }
@@ -20,3 +21,5 @@ export function changeLightMode() {
 		UI.keys[i].classList.toggle('keys_night');
 	}
 }
+
+export function swiftLanguage() {}

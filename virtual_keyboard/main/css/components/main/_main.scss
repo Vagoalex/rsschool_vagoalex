@@ -123,44 +123,31 @@
 	width: 100%;
 }
 .arrow_up {
-	background: url('../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/arrow_up.png');
 	background-color: #fff;
 	margin: 4px;
-	transition: 0.2s;
-	background-repeat: no-repeat;
-	background-size: auto;
-	background-position: center;
 	color: transparent;
+	transition: background-color 0.2s;
 }
 .arrow_down {
-	background: url('../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/arrow_down.png');
 	background-color: #fff;
 	margin: 4px;
-	transition: 0.2s;
-	background-repeat: no-repeat;
-	background-size: auto;
-	background-position: center;
+	transition: background-color 0.2s;
 	color: transparent;
+	transform: rotate(180deg);
 }
 .arrow_left {
-	background: url('../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/arrow_left.png');
 	background-color: #fff;
 	margin: 4px;
-	transition: 0.2s;
-	background-repeat: no-repeat;
-	background-size: auto;
-	background-position: center;
+	transition: background-color 0.2s;
 	color: transparent;
+	transform: rotate(-90deg);
 }
 .arrow_right {
-	background: url('../../../../../../rsschool_vagoalex/virtual_keyboard/assets/icons/arrow_right.png');
 	background-color: #fff;
 	margin: 4px;
-	transition: 0.2s;
-	background-repeat: no-repeat;
-	background-size: auto;
-	background-position: center;
+	transition: background-color 0.2s;
 	color: transparent;
+	transform: rotate(90deg);
 }
 .text-label {
 	margin-bottom: 10px;
@@ -172,7 +159,7 @@
 .text {
 	max-width: 1008px;
 	min-width: 1008px;
-	max-height: 480px;
+	max-height: 300px;
 	min-height: 90px;
 	width: 100%;
 	height: 150px;
@@ -213,19 +200,22 @@ body.active {
 .keys.keys_night {
 	background-color: #3c3c3c;
 	color: #fff;
+	fill: #fff;
 }
 .keys.keys_night.active {
 	background-color: #fff;
 	color: #333;
+
 	transition: 0.2s;
 }
 .text-label.active {
 	color: #fff;
 }
 .text.active {
-	background-color: #2b2b2b;
+	background-color: #3c3c3c;
 	color: #fff;
 }
+
 .keys.keys_night.remove {
 	animation: keys_night_animation 0.5s forwards;
 	transition: 0.2s;
@@ -233,7 +223,6 @@ body.active {
 .keys.remove {
 	animation: keys_animation 0.5s forwards;
 }
-
 @keyframes keys_animation {
 	0% {
 		background-color: #333;
