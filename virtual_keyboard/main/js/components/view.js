@@ -1,5 +1,4 @@
 // import { engLayout, rusLayout } from './layouts.js';
-import { startApp } from '../main.js';
 
 class Key {
 	constructor(keyName) {
@@ -115,7 +114,11 @@ export function createWindowElements() {
 	const body = document.querySelector('body');
 	body.insertAdjacentHTML(
 		'afterBegin',
-		`<div class="container">
+		`<div class="container fog">
+		<div class="check-language">
+		<p class="check-language__desk">Добрый день, дорогой друг!<br />Для правильности работы приложения, пожалуйста,<br /> смени свою раскладку на ENG и нажми ОК!</p>
+		<button class="check-language__btn" type="button">Жмяк</button>
+		</div>
 			<div class="language_mode">
 				<div class="language_circle"></div>
 			</div>
@@ -282,10 +285,10 @@ export function swiftLanguage(language) {
 	if (language.textContent === 'Eng') {
 		const keyboard = document.querySelector('.keyboard-keys');
 		keyboard.innerHTML = '';
-		startApp('Rus');
+		// startApp('Rus');
 	} else if (language.textContent === 'Rus') {
 		const keyboard = document.querySelector('.keyboard-keys');
 		keyboard.innerHTML = '';
-		startApp('Eng');
+		// startApp('Eng');
 	}
 }
