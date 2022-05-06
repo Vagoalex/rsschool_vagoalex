@@ -1,0 +1,230 @@
+@import url("./components/normalize.css");
+@import url("./components/fonts.css");
+@import url("./components/global.css");
+.background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -100;
+}
+
+.wrapper-text {
+  position: fixed;
+  margin: auto;
+  top: calc(100% - 700px);
+}
+
+.text {
+  min-width: 900px;
+  max-width: 900px;
+  min-height: 400px;
+  max-height: 420px;
+  border: 30px solid #000;
+  border-left: 5px solid #000;
+  border-right: 5px solid #000;
+  border-bottom: 15px solid #000;
+  background: url("../../../../../../rsschool_vagoalex/virtual-keyboard/assets/images/textarea-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #faf102;
+  -webkit-clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) calc(100% - 0px), 10px calc(100% - 0px), 0% calc(100% - 10px));
+          clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) calc(100% - 0px), 10px calc(100% - 0px), 0% calc(100% - 10px));
+  padding: 12px;
+}
+
+.keyboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  bottom: 0;
+  padding: 15px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#a91bb6c5), to(black));
+  background: linear-gradient(#a91bb6c5, black);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: bottom 0.4s;
+  transition: bottom 0.4s;
+  overflow: hidden;
+  border-radius: 17px;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+.keyboard__keys {
+  max-width: 1008px;
+  min-width: 1008px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.key {
+  height: 45px;
+  width: 62px;
+  margin: 3px;
+  border-radius: 13px;
+  border: none;
+  border: 1px solid #e601ff;
+  background: rgba(243, 202, 255, 0.2);
+  color: #faf102;
+  font-size: 1.05rem;
+  outline: none;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  vertical-align: top;
+  padding: 0;
+  position: relative;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.backspace_key {
+  width: 116px;
+}
+
+.tab_key {
+  width: 90px;
+}
+
+.splash_key {
+  width: 86px;
+}
+
+.caps-lock_key {
+  width: 117px;
+}
+
+.enter_key {
+  width: 127px;
+}
+
+.shift_key {
+  width: 95px;
+}
+
+.ctrl_left {
+  margin-left: 5px;
+}
+
+.space_key {
+  max-width: 480px;
+  width: 100%;
+}
+
+.arrow_up {
+  margin: 4px;
+  color: transparent;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.arrow_down {
+  margin: 4px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  color: transparent;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.arrow_left {
+  height: 45px;
+  width: 47px;
+  margin: 4px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  color: transparent;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.arrow_right {
+  height: 45px;
+  width: 47px;
+  margin: 4px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  color: transparent;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.lang-key {
+  width: 49px;
+}
+
+.text-label {
+  margin-bottom: 10px;
+  font-size: 35px;
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.key:hover {
+  background: rgba(160, 93, 180, 0.2);
+}
+
+.key:active {
+  border: 2px solid #80008f;
+  background: #faf102;
+  color: #e601ff;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.key:active svg {
+  -webkit-filter: invert(29%) sepia(100%) saturate(6332%) hue-rotate(286deg) brightness(105%) contrast(125%);
+          filter: invert(29%) sepia(100%) saturate(6332%) hue-rotate(286deg) brightness(105%) contrast(125%);
+}
+
+.hidden {
+  display: none;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+/* sm <= Medium (md) 768 < THIS < 1260*/
+/* xs <= Small (sm) 320 < THIS < 720 */
+/*# sourceMappingURL=styles.css.map */

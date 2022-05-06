@@ -1,0 +1,170 @@
+.background {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: -100;
+}
+video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -100;
+}
+.wrapper-text {
+	position: fixed;
+	margin: auto;
+	top: calc(100% - 700px);
+}
+.text {
+	min-width: 900px;
+	max-width: 900px;
+	min-height: 400px;
+	max-height: 420px;
+	border: 30px solid #000;
+	border-left: 5px solid #000;
+	border-right: 5px solid #000;
+	border-bottom: 15px solid #000;
+	background: url('../../../../../../rsschool_vagoalex/virtual-keyboard/assets/images/textarea-bg.jpg');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #faf102;
+	clip-path: polygon(
+		0px 25px,
+		26px 0px,
+		calc(60% - 25px) 0px,
+		60% 25px,
+		100% 25px,
+		100% calc(100% - 10px),
+		calc(100% - 15px) calc(100% - 10px),
+		calc(80% - 10px) calc(100% - 10px),
+		calc(80% - 15px) calc(100% - 0px),
+		10px calc(100% - 0px),
+		0% calc(100% - 10px)
+	);
+	padding: 12px;
+}
+.keyboard {
+	@include flex();
+	justify-content: center;
+	position: fixed;
+	// left: 0;
+	bottom: 0;
+	// width: 100%;
+	padding: 15px;
+	background: linear-gradient(#a91bb6c5, rgb(0, 0, 0));
+	user-select: none;
+	transition: bottom 0.4s;
+	overflow: hidden;
+	border-radius: 17px;
+	order: 2;
+}
+
+.keyboard__keys {
+	max-width: 1008px;
+	min-width: 1008px;
+	display: flex;
+	flex-wrap: wrap;
+}
+.row {
+	@include flex();
+}
+.key {
+	height: 45px;
+	width: 62px;
+	margin: 3px;
+	border-radius: 13px;
+	border: none;
+	border: 1px solid rgb(230, 1, 255);
+	background: rgba(243, 202, 255, 0.2);
+	color: #faf102;
+	font-size: 1.05rem;
+	outline: none;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	vertical-align: top;
+	padding: 0;
+	position: relative;
+	transition: 0.2s;
+}
+
+.backspace_key {
+	width: 116px;
+}
+.tab_key {
+	width: 90px;
+}
+.splash_key {
+	width: 86px;
+}
+.caps-lock_key {
+	width: 117px;
+}
+.enter_key {
+	width: 127px;
+}
+.shift_key {
+	width: 95px;
+}
+.ctrl_left {
+	margin-left: 5px;
+}
+.space_key {
+	max-width: 480px;
+	width: 100%;
+}
+.arrow_up {
+	margin: 4px;
+	color: transparent;
+	transition: background-color 0.2s;
+}
+.arrow_down {
+	margin: 4px;
+	transition: background-color 0.2s;
+	color: transparent;
+	transform: rotate(180deg);
+}
+.arrow_left {
+	height: 45px;
+	width: 47px;
+	margin: 4px;
+	transition: background-color 0.2s;
+	color: transparent;
+	transform: rotate(-90deg);
+}
+.arrow_right {
+	height: 45px;
+	width: 47px;
+	margin: 4px;
+	transition: background-color 0.2s;
+	color: transparent;
+	transform: rotate(90deg);
+}
+.lang-key {
+	width: 49px;
+}
+.text-label {
+	margin-bottom: 10px;
+	font-size: 35px;
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: 0.2s;
+}
+.key:hover {
+	background: rgba(160, 93, 180, 0.2);
+}
+.key:active {
+	border: 2px solid rgb(128, 0, 143);
+	background: #faf102;
+	color: rgb(230, 1, 255);
+	transition: 0.1s;
+	svg {
+		filter: invert(29%) sepia(100%) saturate(6332%) hue-rotate(286deg) brightness(105%) contrast(125%);
+	}
+}
+.hidden {
+	display: none;
+	transition: 0.2s;
+}

@@ -1,0 +1,42 @@
+@font-face {
+	font-family: 'Cyberpunk';
+	src: url('../../../assets/fonts/Cyberpunk.woff2') format('truetype');
+	font-display: swap;
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Asherpunk';
+	src: url('../../../assets/fonts/AsherPunk.woff2') format('truetype');
+	font-display: swap;
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Marske';
+	src: url('../../../assets/fonts/Marske.woff2') format('truetype');
+	font-display: swap;
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'NewZelek';
+	src: url('../../../assets/fonts/NewZelek.woff2') format('truetype');
+	font-display: swap;
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'BlenderPro-Bold';
+	src: url('../../../assets/fonts/BlenderPro-Bold.woff2') format('truetype');
+	font-display: swap;
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'BlenderPro-Medium';
+	src: url('../../../assets/fonts/BlenderPro-Medium.woff2') format('truetype');
+	font-display: swap;
+	font-weight: 400;
+	font-style: normal;
+}
