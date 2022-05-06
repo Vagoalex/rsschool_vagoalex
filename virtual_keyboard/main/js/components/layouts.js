@@ -1,5 +1,4 @@
-// After start App we created a UI object for easy navigation;
-
+// Rus and eng layouts
 export const rusLayout = [
 	'ё',
 	1,

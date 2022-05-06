@@ -85,6 +85,7 @@
   overflow: hidden;
   position: relative;
   overflow: hidden;
+  border-radius: 17px;
   -webkit-box-ordinal-group: 3;
       -ms-flex-order: 2;
           order: 2;
@@ -132,10 +133,17 @@
       -ms-flex-align: center;
           align-items: center;
   margin: 4px;
+  border-radius: 15px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   z-index: 5;
   cursor: pointer;
+}
+
+.language-key {
+  background-color: #b9b9b9;
+  color: #000;
+  font-weight: 700;
 }
 
 .backspace_key {
@@ -227,6 +235,7 @@
   height: 150px;
   margin-bottom: 30px;
   border: none;
+  border-radius: 20px;
   outline: none;
   font-size: 20px;
   background-color: #f7f7f7;
@@ -278,6 +287,11 @@ body.active {
   color: #333;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+}
+
+.keys.language-key.keys_night {
+  background-color: #1e1e1e;
+  color: #fff;
 }
 
 .text-label.active {

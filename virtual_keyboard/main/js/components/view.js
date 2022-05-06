@@ -1,4 +1,4 @@
-import { engLayout, rusLayout } from './UI.js';
+// import { engLayout, rusLayout } from './layouts.js';
 import { startApp } from '../main.js';
 
 class Key {
@@ -11,6 +11,10 @@ class Key {
 		div.classList.add('keys');
 		div.textContent = this.keyName;
 		div.setAttribute('keyname', this.keyName);
+
+		const svg = `<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'>
+						<path d='M14.15 30.45 11.7 28 24 15.7 36.3 28 33.85 30.45 24 20.6Z' />
+					</svg>`;
 		switch (keyName) {
 			case 'Backspace':
 				div.classList.add('backspace_key');
@@ -23,7 +27,6 @@ class Key {
 				break;
 			case 'Caps Lock':
 				div.classList.add('caps-lock_key');
-				// div.setAttribute('keyname', 'CapsLock');
 				break;
 			case 'Enter':
 				div.classList.add('enter_key');
@@ -43,45 +46,25 @@ class Key {
 			case 'Up':
 				div.classList.add('arrow_up');
 				div.textContent = '';
-				div.insertAdjacentHTML(
-					'afterBegin',
-					`	<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'>
-						<path d='M14.15 30.45 11.7 28 24 15.7 36.3 28 33.85 30.45 24 20.6Z' />
-					</svg>`
-				);
+				div.insertAdjacentHTML('afterBegin', svg);
 				div.setAttribute('keyname', 'ArrowUp');
 				break;
 			case 'Left':
 				div.classList.add('arrow_left');
 				div.textContent = '';
-				div.insertAdjacentHTML(
-					'afterBegin',
-					`	<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'>
-						<path d='M14.15 30.45 11.7 28 24 15.7 36.3 28 33.85 30.45 24 20.6Z' />
-					</svg>`
-				);
+				div.insertAdjacentHTML('afterBegin', svg);
 				div.setAttribute('keyname', 'ArrowLeft');
 				break;
 			case 'Down':
 				div.classList.add('arrow_down');
 				div.textContent = '';
-				div.insertAdjacentHTML(
-					'afterBegin',
-					`	<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'>
-						<path d='M14.15 30.45 11.7 28 24 15.7 36.3 28 33.85 30.45 24 20.6Z' />
-					</svg>`
-				);
+				div.insertAdjacentHTML('afterBegin', svg);
 				div.setAttribute('keyname', 'ArrowDown');
 				break;
 			case 'Right':
 				div.classList.add('arrow_right');
 				div.textContent = '';
-				div.insertAdjacentHTML(
-					'afterBegin',
-					`	<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'>
-						<path d='M14.15 30.45 11.7 28 24 15.7 36.3 28 33.85 30.45 24 20.6Z' />
-					</svg>`
-				);
+				div.insertAdjacentHTML('afterBegin', svg);
 				div.setAttribute('keyname', 'ArrowRight');
 				break;
 			case 'ControlLeft':
@@ -114,9 +97,11 @@ class Key {
 			// switch language
 			case 'Rus':
 				div.id = 'rusKeyboard';
+				div.classList.add('language-key');
 				break;
 			case 'Eng':
 				div.id = 'engKeyboard';
+				div.classList.add('language-key');
 				break;
 
 			default:
@@ -146,8 +131,8 @@ export function createWindowElements() {
 				<div class="keyboard_lights"></div>
 				<div class="keyboard-keys"></div>
 			</div>
-			<label class="text-label" for="keyboard">Tell us your story:</label>
-			<textarea class="text" id="keyboard" name="keyboard" placeholder="It was a dark and stormy night..."></textarea>
+			<label class="text-label" for="textarea">Tell us your story:</label>
+			<textarea class="text" id="textarea" name="textarea" placeholder="It was a dark and stormy night..."></textarea>
 			</div>`
 	);
 }
@@ -162,7 +147,7 @@ export function createKeyboardElements(languageLayout) {
 
 function replaceRusUpper(wrapper) {
 	const rusKeys = wrapper;
-	rusKeys.forEach(key => {
+	rusKeys.childNodes.forEach(key => {
 		key.setAttribute('upperKey', key.textContent.toUpperCase());
 		switch (key.textContent) {
 			case '1':
@@ -297,12 +282,10 @@ export function swiftLanguage(language) {
 	if (language.textContent === 'Eng') {
 		const keyboard = document.querySelector('.keyboard-keys');
 		keyboard.innerHTML = '';
-		startApp(rusLayout);
-		setKeysToUpper(rusLayout, keyboard);
+		startApp('Rus');
 	} else if (language.textContent === 'Rus') {
 		const keyboard = document.querySelector('.keyboard-keys');
 		keyboard.innerHTML = '';
-		startApp(engLayout);
-		setKeysToUpper(engLayout, keyboard);
+		startApp('Eng');
 	}
 }
