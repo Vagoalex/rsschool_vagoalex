@@ -1,4 +1,5 @@
-// import { engLayout, rusLayout } from './UI.js';
+import { engLayout, rusLayout } from './UI.js';
+import { startApp } from '../main.js';
 
 class Key {
 	constructor(keyName) {
@@ -22,7 +23,7 @@ class Key {
 				break;
 			case 'Caps Lock':
 				div.classList.add('caps-lock_key');
-				div.setAttribute('keyname', 'CapsLock');
+				// div.setAttribute('keyname', 'CapsLock');
 				break;
 			case 'Enter':
 				div.classList.add('enter_key');
@@ -109,6 +110,13 @@ class Key {
 				break;
 			case 'Space':
 				div.classList.add('space_key');
+				break;
+			// switch language
+			case 'Rus':
+				div.id = 'rusKeyboard';
+				break;
+			case 'Eng':
+				div.id = 'engKeyboard';
 				break;
 
 			default:
@@ -285,15 +293,16 @@ export function setKeysToUpper(language, wrapper) {
 	}
 }
 
-export function swiftLanguage() {
-	console.log('.!.');
-	// if (language.textContent === 'Eng') {
-	// 	const keyboard = document.querySelector('.keyboard-keys');
-	// 	keyboard.innerHTML = '';
-	// 	createKeyboardElements(engLayout);
-	// } else if (language.textContent === 'Rus') {
-	// 	const keyboard = document.querySelector('.keyboard-keys');
-	// 	keyboard.innerHTML = '';
-	// 	createKeyboardElements(rusLayout);
-	// }
+export function swiftLanguage(language) {
+	if (language.textContent === 'Eng') {
+		const keyboard = document.querySelector('.keyboard-keys');
+		keyboard.innerHTML = '';
+		startApp(rusLayout);
+		setKeysToUpper(rusLayout, keyboard);
+	} else if (language.textContent === 'Rus') {
+		const keyboard = document.querySelector('.keyboard-keys');
+		keyboard.innerHTML = '';
+		startApp(engLayout);
+		setKeysToUpper(engLayout, keyboard);
+	}
 }

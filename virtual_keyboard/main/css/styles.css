@@ -79,6 +79,7 @@
 
 .keyboard-wrapper {
   max-width: 1008px;
+  min-width: 1008px;
   width: 100%;
   background-color: #e7e7e7;
   overflow: hidden;

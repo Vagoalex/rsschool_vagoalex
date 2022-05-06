@@ -3,9 +3,12 @@ import { changeColor, changeLightMode } from './components/helpers.js';
 import { engLayout } from './components/UI.js';
 
 // Start App;
+export function startApp(layout) {
+	createKeyboardElements(layout);
+}
 (() => {
 	createWindowElements();
-	createKeyboardElements(engLayout);
+	startApp(engLayout);
 })();
 
 export const UI = {
@@ -41,51 +44,56 @@ UI.colors.addEventListener('input', changeColor);
 
 window.addEventListener('keydown', event => {
 	UI.keys.forEach(key => {
-		if (event.shiftKey && event.altKey) {
-			const rus = key.textContent === 'Rus';
-			const eng = key.textContent === 'Eng';
-			if (rus) {
-				console.log('rus');
-				swiftLanguage();
-			} else if (eng) {
-				console.log('eng');
-				swiftLanguage();
-			}
-		}
 		if (event.key === key.getAttribute('keyname')) {
 			key.classList.add('active');
-			// console.log(key);
-			// console.log(event);
 		}
-		if (event.code === 'Space') {
-			UI.spaceKey.classList.add('active');
-		}
-		if (event.code === 'ShiftLeft') {
-			UI.shift_right.classList.remove('active');
-		}
-		if (event.code === 'ShiftRight') {
-			UI.shift_left.classList.remove('active');
-		}
-		if (event.code === 'AltLeft') {
-			UI.alt_right.classList.remove('active');
-		}
-		if (event.code === 'AltRight') {
-			UI.alt_left.classList.remove('active');
-		}
-		if (event.code === 'ControlLeft') {
-			UI.ctrl_right.classList.remove('active');
-		}
-		if (event.code === 'ControlRight') {
-			UI.ctrl_left.classList.remove('active');
-		}
-		if (event.code === 'CapsLock') {
-			UI.caps_lock_key.classList.toggle('active');
+		if (event.key === 'Control' && key.getAttribute('keyname') === 'Ctrl') {
+			key.classList.add('active');
 		}
 	});
+
+	if (event.code === 'Space') {
+		UI.spaceKey.classList.add('active');
+	}
+	if (event.code === 'ShiftLeft') {
+		UI.shift_right.classList.remove('active');
+	}
+	if (event.code === 'ShiftRight') {
+		UI.shift_left.classList.remove('active');
+	}
+	if (event.code === 'AltLeft') {
+		UI.alt_right.classList.remove('active');
+	}
+	if (event.code === 'AltRight') {
+		UI.alt_left.classList.remove('active');
+	}
+	if (event.code === 'ControlLeft') {
+		UI.ctrl_right.classList.remove('active');
+	}
+	if (event.code === 'ControlRight') {
+		UI.ctrl_left.classList.remove('active');
+	}
+	if (event.code === 'CapsLock') {
+		UI.caps_lock_key.classList.toggle('active');
+	}
+
+	if (event.shiftKey && event.altKey) {
+		const rus = document.querySelector('#rusKeyboard');
+		const eng = document.querySelector('#engKeyboard');
+		if (rus) {
+			swiftLanguage(rus);
+		} else if (eng) {
+			swiftLanguage(eng);
+		}
+	}
 });
 window.addEventListener('keyup', event => {
 	UI.keys.forEach(key => {
 		if (event.key === key.getAttribute('keyname')) {
+			key.classList.remove('active');
+			key.classList.add('remove');
+		}
+		if (event.key === 'Control' && key.getAttribute('keyname') === 'Ctrl') {
 			key.classList.remove('active');
 			key.classList.add('remove');
 		}
