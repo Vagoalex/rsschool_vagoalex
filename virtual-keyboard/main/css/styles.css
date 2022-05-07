@@ -16,10 +16,44 @@ video {
   z-index: -100;
 }
 
+.video-mute {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+.video-mute__btn {
+  padding: 10px 25px;
+  background: #121a27;
+  border-radius: 12px;
+  border: groove 1px transparent;
+  color: #faf102;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.video-mute__btn:hover {
+  background: #213048;
+}
+
 .wrapper-text {
   position: fixed;
   margin: auto;
   top: calc(100% - 700px);
+}
+
+.wrapper-text__helper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #faf102;
+  text-shadow: 2px 2px 2px pink;
+  font-size: 17px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .text {
@@ -36,9 +70,30 @@ video {
   background-size: cover;
   background-repeat: no-repeat;
   color: #faf102;
+  text-shadow: 2px 2px 2px pink;
+  padding: 12px;
   -webkit-clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) calc(100% - 0px), 10px calc(100% - 0px), 0% calc(100% - 10px));
           clip-path: polygon(0px 25px, 26px 0px, calc(60% - 25px) 0px, 60% 25px, 100% 25px, 100% calc(100% - 10px), calc(100% - 15px) calc(100% - 10px), calc(80% - 10px) calc(100% - 10px), calc(80% - 15px) calc(100% - 0px), 10px calc(100% - 0px), 0% calc(100% - 10px));
-  padding: 12px;
+}
+
+.text::-webkit-input-placeholder {
+  color: #faf102;
+  text-shadow: 2px 2px 2px pink;
+}
+
+.text:-ms-input-placeholder {
+  color: #faf102;
+  text-shadow: 2px 2px 2px pink;
+}
+
+.text::-ms-input-placeholder {
+  color: #faf102;
+  text-shadow: 2px 2px 2px pink;
+}
+
+.text::placeholder {
+  color: #faf102;
+  text-shadow: 2px 2px 2px pink;
 }
 
 .keyboard {
@@ -68,6 +123,12 @@ video {
   -webkit-box-ordinal-group: 3;
       -ms-flex-order: 2;
           order: 2;
+}
+
+.keyboard--hidden {
+  bottom: -100%;
+  -webkit-transition: top 0.4s;
+  transition: top 0.4s;
 }
 
 .keyboard__keys {

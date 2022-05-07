@@ -10,10 +10,37 @@ video {
 	object-fit: cover;
 	z-index: -100;
 }
+.video-mute {
+	position: absolute;
+	top: 2%;
+	right: 2%;
+	&__btn {
+		padding: 10px 25px;
+		background: #121a27;
+		border-radius: 12px;
+		border: groove 1px transparent;
+		color: #faf102;
+		text-transform: uppercase;
+		font-weight: 700;
+		cursor: pointer;
+		&:hover {
+			background: #213048;
+		}
+	}
+}
 .wrapper-text {
 	position: fixed;
 	margin: auto;
 	top: calc(100% - 700px);
+}
+.wrapper-text__helper {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #faf102;
+	text-shadow: 2px 2px 2px pink;
+	font-size: 17px;
+	user-select: none;
 }
 .text {
 	min-width: 900px;
@@ -29,6 +56,8 @@ video {
 	background-size: cover;
 	background-repeat: no-repeat;
 	color: #faf102;
+	text-shadow: 2px 2px 2px pink;
+	padding: 12px;
 	clip-path: polygon(
 		0px 25px,
 		26px 0px,
@@ -42,15 +71,16 @@ video {
 		10px calc(100% - 0px),
 		0% calc(100% - 10px)
 	);
-	padding: 12px;
+}
+.text::placeholder {
+	color: #faf102;
+	text-shadow: 2px 2px 2px pink;
 }
 .keyboard {
 	@include flex();
 	justify-content: center;
 	position: fixed;
-	// left: 0;
 	bottom: 0;
-	// width: 100%;
 	padding: 15px;
 	background: linear-gradient(#a91bb6c5, rgb(0, 0, 0));
 	user-select: none;
@@ -58,6 +88,10 @@ video {
 	overflow: hidden;
 	border-radius: 17px;
 	order: 2;
+}
+.keyboard--hidden {
+	bottom: -100%;
+	transition: top 0.4s;
 }
 
 .keyboard__keys {
