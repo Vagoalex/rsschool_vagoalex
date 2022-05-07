@@ -123,6 +123,8 @@ video {
 	position: relative;
 	transition: 0.2s;
 }
+.key--special {
+}
 
 .backspace_key {
 	width: 116px;
@@ -131,7 +133,7 @@ video {
 	width: 90px;
 }
 .splash_key {
-	width: 86px;
+	width: 118px;
 }
 .caps-lock_key {
 	width: 117px;
@@ -141,9 +143,6 @@ video {
 }
 .shift_key {
 	width: 95px;
-}
-.ctrl_left {
-	margin-left: 5px;
 }
 .space_key {
 	max-width: 480px;
@@ -201,4 +200,9 @@ video {
 .hidden {
 	display: none;
 	transition: 0.2s;
+}
+.caps-lock_key--active {
+}
+.key--hidden {
+	background: rgba(69, 58, 73, 0.2);
 }
