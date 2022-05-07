@@ -155,7 +155,7 @@ const Keyboard = {
 					keyElem.textContent = 'Backspace';
 
 					keyElem.addEventListener('click', () => {
-						const textarea = document.querySelector('.textarea');
+						const textarea = document.querySelector('.text');
 						const position = textarea.selectionStart;
 						const first = this.props.value.slice(0, position);
 						const second = this.props.value.slice(position);
@@ -170,7 +170,7 @@ const Keyboard = {
 					keyElem.textContent = 'Caps Lock';
 
 					keyElem.addEventListener('click', () => {
-						const textarea = document.querySelector('.textarea');
+						const textarea = document.querySelector('.text');
 						textarea.focus();
 
 						this.toggleCapsLock();
@@ -213,7 +213,7 @@ const Keyboard = {
 					keyElem.textContent = 'Shift';
 
 					keyElem.addEventListener('click', () => {
-						const textarea = document.querySelector('.textarea');
+						const textarea = document.querySelector('.text');
 						textarea.focus();
 
 						this.shiftOn();
@@ -225,7 +225,7 @@ const Keyboard = {
 					keyElem.textContent = 'Eng';
 
 					keyElem.addEventListener('click', () => {
-						const textarea = document.querySelector('.textarea');
+						const textarea = document.querySelector('.text');
 						textarea.focus();
 						this.changeLanguage();
 						keyElem.textContent = this.props.EnRu ? 'Rus' : 'Eng';
@@ -276,7 +276,7 @@ const Keyboard = {
 					keyElem.classList.add('arrow_left');
 
 					keyElem.addEventListener('click', () => {
-						const textarea = document.querySelector('.textarea');
+						const textarea = document.querySelector('.text');
 						textarea.focus();
 						if (textarea.selectionStart === 0) {
 							textarea.selectionStart = 0;
@@ -292,7 +292,7 @@ const Keyboard = {
 					keyElem.classList.add('arrow_right');
 
 					keyElem.addEventListener('click', () => {
-						const textarea = document.querySelector('.textarea');
+						const textarea = document.querySelector('.text');
 						textarea.focus();
 						textarea.selectionStart += 1;
 						textarea.selectionEnd = textarea.selectionStart;
@@ -304,7 +304,7 @@ const Keyboard = {
 
 					keyElem.addEventListener('click', () => {
 						console.log('bottom');
-						// const textarea = document.querySelector('.textarea');
+						// const textarea = document.querySelector('.text');
 						// textarea.focus();
 						// if (textarea.selectionStart === 0) {
 						// 	textarea.selectionStart = 0;
@@ -348,16 +348,65 @@ const Keyboard = {
 	},
 
 	triggerEvent(handlerName) {
-		console.log(`Event Triggered. Event: ${handlerName}`);
+		const textarea = document.querySelector('.text');
+		if (typeof this.eventHandlers[handlerName] === 'function') {
+			const position = textarea.selectionStart;
+
+			this.eventHandlers[handlerName](this.props.value);
+			textarea.selectionEnd = position + 1;
+		}
+	},
+
+	triggerEventBack(handlerName) {
+		const textarea = document.querySelector('.text');
+		if (typeof this.eventHandlers[handlerName] === 'function') {
+			const position = textarea.selectionStart;
+			this.eventHandlers[handlerName](this.props.value);
+			if (position > 0) {
+				textarea.selectionEnd = position - 1;
+			} else {
+				textarea.selectionStart = 0;
+				textarea.selectionEnd = 0;
+			}
+		}
+	},
+
+	changeLanguage() {
+		// soon...
 	},
 
 	toggleCapsLock() {
-		console.log('Caps Lock Toggled');
+		this.props.capsLock = !this.props.capsLock;
+		const { keys } = this.elements;
+
+		keys.forEach(key => {
+			if (key.childElementCount === 0 && keys.innerText.length === 1) {
+				if (this.properties.shift) {
+					key.textContent = this.properties.capsLock ? key.textContent.toLowerCase() : key.textContent.toUpperCase();
+				} else {
+					key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+				}
+			}
+		});
 	},
 
-	open(initialValue, oninput, onclose) {},
+	shiftOn() {
+		// soon...
+	},
 
-	close() {},
+	open(initialValue, oninput, onclose) {
+		this.props.value = initialValue || '';
+		this.eventHandlers.onclose = onclose;
+		this.eventHandlers.oninput = oninput;
+		this.elements.main.classList.remove('keyboard--hidden');
+	},
+
+	close() {
+		this.props.value = '';
+		this.eventHandlers.onclose = onclose;
+		this.eventHandlers.oninput = oninput;
+		this.elements.main.classList.add('keyboard--hidden');
+	},
 };
 
 createWindowElements();

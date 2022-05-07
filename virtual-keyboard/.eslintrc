@@ -8,7 +8,7 @@
 		"import/prefer-default-export": "off",
 		"no-plusplus": 0,
 		"import/no-cycle": "off",
-		"no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["element"] }]
+		"no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["element", "key"] }]
 	},
 	"parserOptions": {
 		"ecmaVersion": "latest",

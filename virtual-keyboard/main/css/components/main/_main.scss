@@ -84,14 +84,14 @@ video {
 	padding: 15px;
 	background: linear-gradient(#a91bb6c5, rgb(0, 0, 0));
 	user-select: none;
-	transition: bottom 0.4s;
+	transition: bottom 1.2s;
 	overflow: hidden;
 	border-radius: 17px;
 	order: 2;
 }
 .keyboard--hidden {
 	bottom: -100%;
-	transition: top 0.4s;
+	transition: bottom 1.2s;
 }
 
 .keyboard__keys {
