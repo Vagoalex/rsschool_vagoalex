@@ -40,7 +40,7 @@ video {
 .wrapper-text {
   position: fixed;
   margin: auto;
-  top: calc(100% - 700px);
+  top: calc(100% - 720px);
 }
 
 .wrapper-text__helper {
@@ -108,7 +108,7 @@ video {
       -ms-flex-pack: center;
           justify-content: center;
   position: fixed;
-  bottom: 0;
+  bottom: 1%;
   padding: 15px;
   background: -webkit-gradient(linear, left top, left bottom, from(#a91bb6c5), to(black));
   background: linear-gradient(#a91bb6c5, black);
@@ -188,7 +188,7 @@ video {
 }
 
 .splash_key {
-  width: 118px;
+  width: 90px;
 }
 
 .caps-lock_key {
@@ -280,6 +280,10 @@ video {
   display: none;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+}
+
+.caps-lock_key--active {
+  background: rgba(36, 22, 40, 0.2);
 }
 
 .key--hidden {

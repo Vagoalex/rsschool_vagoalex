@@ -31,7 +31,7 @@ video {
 .wrapper-text {
 	position: fixed;
 	margin: auto;
-	top: calc(100% - 700px);
+	top: calc(100% - 720px);
 }
 .wrapper-text__helper {
 	position: absolute;
@@ -80,7 +80,7 @@ video {
 	@include flex();
 	justify-content: center;
 	position: fixed;
-	bottom: 0;
+	bottom: 1%;
 	padding: 15px;
 	background: linear-gradient(#a91bb6c5, rgb(0, 0, 0));
 	user-select: none;
@@ -133,7 +133,7 @@ video {
 	width: 90px;
 }
 .splash_key {
-	width: 118px;
+	width: 90px;
 }
 .caps-lock_key {
 	width: 117px;
@@ -202,6 +202,7 @@ video {
 	transition: 0.2s;
 }
 .caps-lock_key--active {
+	background: rgba(36, 22, 40, 0.2);
 }
 .key--hidden {
 	background: rgba(69, 58, 73, 0.2);

@@ -221,7 +221,7 @@ const Keyboard = {
 					});
 					break;
 				case 'Eng/Rus':
-					keyElem.classList.add('lang-key');
+					keyElem.classList.add('key--special', 'lang-key');
 					keyElem.textContent = 'Eng';
 
 					keyElem.addEventListener('click', () => {
@@ -236,6 +236,21 @@ const Keyboard = {
 					keyElem.classList.add('splash_key');
 					keyElem.textContent = '\\';
 					break;
+				case 'Tab':
+					keyElem.classList.add('key--special', 'tab_key');
+					keyElem.textContent = 'Tab';
+
+					keyElem.addEventListener('click', () => {
+						const textarea = document.querySelector('.text');
+						const position = textarea.selectionStart;
+						const first = this.props.value.slice(0, position);
+						const second = this.props.value.slice(position);
+
+						textarea.focus();
+						this.props.value = `${first} ${second}`;
+						this.triggerEvent('oninput');
+					});
+					break;
 				case 'Ctrl':
 					keyElem.classList.add('key--special');
 					keyElem.textContent = 'Ctrl';
@@ -246,7 +261,7 @@ const Keyboard = {
 					break;
 				case 'Done':
 					keyElem.classList.add('key--special', 'key--hidden');
-					keyElem.innerText = 'HIDE@';
+					keyElem.textContent = 'HIDE@';
 
 					keyElem.addEventListener('click', () => {
 						this.close();
@@ -255,7 +270,7 @@ const Keyboard = {
 					break;
 				case 'Up':
 					keyElem.insertAdjacentHTML('afterbegin', svg);
-					keyElem.classList.add('arrow_up');
+					keyElem.classList.add('key--special', 'arrow_up');
 
 					keyElem.addEventListener('click', () => {
 						console.log('up');
@@ -273,7 +288,7 @@ const Keyboard = {
 					break;
 				case 'Left':
 					keyElem.insertAdjacentHTML('afterbegin', svg);
-					keyElem.classList.add('arrow_left');
+					keyElem.classList.add('key--special', 'arrow_left');
 
 					keyElem.addEventListener('click', () => {
 						const textarea = document.querySelector('.text');
@@ -289,7 +304,7 @@ const Keyboard = {
 					break;
 				case 'Right':
 					keyElem.insertAdjacentHTML('afterbegin', svg);
-					keyElem.classList.add('arrow_right');
+					keyElem.classList.add('key--special', 'arrow_right');
 
 					keyElem.addEventListener('click', () => {
 						const textarea = document.querySelector('.text');
@@ -300,7 +315,7 @@ const Keyboard = {
 					break;
 				case 'Bottom':
 					keyElem.insertAdjacentHTML('afterbegin', svg);
-					keyElem.classList.add('arrow_down');
+					keyElem.classList.add('key--special', 'arrow_down');
 
 					keyElem.addEventListener('click', () => {
 						console.log('bottom');
@@ -372,26 +387,149 @@ const Keyboard = {
 	},
 
 	changeLanguage() {
-		// soon...
+		if (this.props.shift) this.shiftOn();
+		if (this.props.capsLock) this.toggleCapsLock();
+		this.props.EnRu = !this.props.EnRu;
+
+		const langEn = [
+			'q',
+			'w',
+			'e',
+			'r',
+			't',
+			'y',
+			'u',
+			'i',
+			'o',
+			'p',
+			'[',
+			']',
+			'a',
+			's',
+			'd',
+			'f',
+			'g',
+			'h',
+			'j',
+			'k',
+			'l',
+			';',
+			"'",
+			'z',
+			'x',
+			'c',
+			'v',
+			'b',
+			'n',
+			'm',
+			',',
+			'.',
+			'?',
+		];
+		const langRu = [
+			'ё',
+			'й',
+			'ц',
+			'у',
+			'к',
+			'е',
+			'н',
+			'г',
+			'ш',
+			'щ',
+			'з',
+			'х',
+			'ъ',
+			'ф',
+			'ы',
+			'в',
+			'а',
+			'п',
+			'р',
+			'о',
+			'л',
+			'д',
+			'ж',
+			'э',
+			'я',
+			'ч',
+			'с',
+			'м',
+			'и',
+			'т',
+			'ь',
+			'б',
+			'ю',
+			'.',
+		];
+
+		document.querySelectorAll('button').forEach(key => {
+			key.classList.remove('keyboard__key--active');
+			if (this.props.EnRu) {
+				if (langEn.indexOf(key.textContent) > -1) {
+					key.textContent = langRu[langEn.indexOf(key.textContent)];
+				}
+			} else if (langRu.indexOf(key.textContent) > -1) {
+				key.textContent = langEn[langRu.indexOf(key.textContent)];
+			}
+		});
 	},
 
 	toggleCapsLock() {
 		this.props.capsLock = !this.props.capsLock;
 		const { keys } = this.elements;
-
 		keys.forEach(key => {
-			if (key.childElementCount === 0 && keys.innerText.length === 1) {
-				if (this.properties.shift) {
-					key.textContent = this.properties.capsLock ? key.textContent.toLowerCase() : key.textContent.toUpperCase();
+			if (key.childElementCount === 0 && !key.classList.contains('key--special')) {
+				if (this.props.shift) {
+					key.textContent = this.props.capsLock ? key.textContent.toLowerCase() : key.textContent.toUpperCase();
 				} else {
-					key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+					key.textContent = this.props.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
 				}
 			}
 		});
 	},
 
 	shiftOn() {
-		// soon...
+		this.props.shift = !this.props.shift;
+
+		const defaultItemEn = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '?'];
+		const shiftItemEn = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '/'];
+		const defaultItemRU = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\\', '.'];
+		const shiftItemRu = ['!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '/', ','];
+
+		document.querySelectorAll('button').forEach(key => {
+			if (this.props.shift && this.props.EnRu === false) {
+				if (key.textContent.charCodeAt(0) > 64 && key.textContent.charCodeAt(0) < 91 && !key.classList.contains('key--special')) {
+					key.textContent = key.textContent.toLowerCase();
+				} else if (key.textContent.charCodeAt(0) > 96 && key.textContent.charCodeAt(0) < 123 && !key.classList.contains('key--special')) {
+					key.textContent = key.textContent.toUpperCase();
+				} else if (defaultItemEn.indexOf(key.textContent) > -1) {
+					key.textContent = shiftItemEn[defaultItemEn.indexOf(key.textContent)];
+				}
+			} else if (this.props.EnRu === false) {
+				if (key.textContent.charCodeAt(0) > 64 && key.textContent.charCodeAt(0) < 91 && !key.classList.contains('key--special')) {
+					key.textContent = key.textContent.toLowerCase();
+				} else if (key.textContent.charCodeAt(0) > 96 && key.textContent.charCodeAt(0) < 123 && !key.classList.contains('key--special')) {
+					key.textContent = key.textContent.toUpperCase();
+				} else if (shiftItemEn.indexOf(key.textContent) > -1) {
+					key.textContent = defaultItemEn[shiftItemEn.indexOf(key.textContent)];
+				}
+			} else if (this.props.shift && this.props.EnRu === true) {
+				if (key.textContent.charCodeAt(0) > 1039 && key.textContent.charCodeAt(0) < 1072 && !key.classList.contains('key--special')) {
+					key.textContent = key.textContent.toLowerCase();
+				} else if (key.textContent.charCodeAt(0) > 1071 && key.textContent.charCodeAt(0) < 1104 && !key.classList.contains('key--special')) {
+					key.textContent = key.textContent.toUpperCase();
+				} else if (defaultItemRU.indexOf(key.textContent) > -1) {
+					key.textContent = shiftItemRu[defaultItemRU.indexOf(key.textContent)];
+				}
+			} else if (key.textContent.charCodeAt(0) > 1039 && key.textContent.charCodeAt(0) < 1072 && !key.classList.contains('key--special')) {
+				key.textContent = key.textContent.toLowerCase();
+			} else if (key.textContent.charCodeAt(0) > 1071 && key.textContent.charCodeAt(0) < 1104 && !key.classList.contains('key--special')) {
+				key.textContent = key.textContent.toUpperCase();
+			} else if (shiftItemRu.indexOf(key.textContent) > -1) {
+				key.textContent = defaultItemRU[shiftItemRu.indexOf(key.textContent)];
+			}
+		});
 	},
 
 	open(initialValue, oninput, onclose) {
