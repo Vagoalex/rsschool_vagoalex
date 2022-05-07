@@ -1,0 +1,239 @@
+.background {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: -100;
+}
+video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -100;
+}
+.message {
+	position: absolute;
+	top: 2%;
+	left: 2%;
+	align-items: center;
+
+	&__desk {
+		padding: 5px;
+		height: 65px;
+		width: 580px;
+		background: #121a27;
+		border-radius: 12px;
+		font-size: 14px;
+		border: groove 1px transparent;
+		color: #faf102;
+		text-transform: uppercase;
+		font-weight: 700;
+	}
+}
+.video-mute {
+	position: absolute;
+	top: 2%;
+	right: 2%;
+
+	&__btn {
+		height: 40px;
+		width: 240px;
+		background: #121a27;
+		border-radius: 12px;
+		border: groove 1px transparent;
+		color: #faf102;
+		text-transform: uppercase;
+		font-weight: 700;
+		cursor: pointer;
+		&:hover {
+			background: #213048;
+		}
+	}
+}
+.wrapper-text {
+	position: fixed;
+	margin: auto;
+	top: calc(100% - 720px);
+}
+.wrapper-text__helper {
+	position: absolute;
+	top: 0;
+	right: 163px;
+	color: #faf102;
+	text-shadow: 2px 2px 2px pink;
+	font-size: 17px;
+	user-select: none;
+}
+.text {
+	min-width: 900px;
+	max-width: 900px;
+	min-height: 400px;
+	max-height: 420px;
+	border: 30px solid #000;
+	border-left: 5px solid #000;
+	border-right: 5px solid #000;
+	border-bottom: 15px solid #000;
+	background: url('../../../../../../rsschool_vagoalex/virtual-keyboard/assets/images/textarea-bg.jpg');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #faf102;
+	text-shadow: 2px 2px 2px pink;
+	padding: 12px;
+	clip-path: polygon(
+		0px 25px,
+		26px 0px,
+		calc(60% - 25px) 0px,
+		60% 25px,
+		100% 25px,
+		100% calc(100% - 10px),
+		calc(100% - 15px) calc(100% - 10px),
+		calc(80% - 10px) calc(100% - 10px),
+		calc(80% - 15px) calc(100% - 0px),
+		10px calc(100% - 0px),
+		0% calc(100% - 10px)
+	);
+}
+.text::placeholder {
+	color: #faf102;
+	text-shadow: 2px 2px 2px pink;
+}
+.keyboard {
+	@include flex();
+	justify-content: center;
+	position: fixed;
+	bottom: 1%;
+	padding: 15px;
+	background: linear-gradient(#a91bb6c5, rgb(0, 0, 0));
+	user-select: none;
+	transition: bottom 1.2s;
+	overflow: hidden;
+	border-radius: 17px;
+	order: 2;
+}
+.keyboard--hidden {
+	bottom: -100%;
+	transition: bottom 1.2s;
+}
+
+.keyboard__keys {
+	max-width: 1008px;
+	min-width: 1008px;
+	display: flex;
+	flex-wrap: wrap;
+}
+.row {
+	@include flex();
+}
+.key {
+	height: 45px;
+	width: 62px;
+	margin: 3px;
+	border-radius: 13px;
+	border: none;
+	border: 1px solid rgb(230, 1, 255);
+	background: rgba(243, 202, 255, 0.2);
+	color: #faf102;
+	font-size: 1.05rem;
+	outline: none;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	vertical-align: top;
+	padding: 0;
+	position: relative;
+	transition: 0.2s;
+}
+.key--special {
+}
+
+.backspace_key {
+	width: 116px;
+}
+.tab_key {
+	width: 90px;
+}
+.splash_key {
+	width: 90px;
+}
+.caps-lock_key {
+	width: 117px;
+}
+.enter_key {
+	width: 127px;
+}
+.shift_key {
+	width: 95px;
+}
+.space_key {
+	max-width: 480px;
+	width: 100%;
+}
+.arrow_up {
+	margin: 4px;
+	color: transparent;
+	transition: background-color 0.2s;
+}
+.arrow_down {
+	margin: 4px;
+	transition: background-color 0.2s;
+	color: transparent;
+	transform: rotate(180deg);
+}
+.arrow_left {
+	height: 45px;
+	width: 47px;
+	margin: 4px;
+	transition: background-color 0.2s;
+	color: transparent;
+	transform: rotate(-90deg);
+}
+.arrow_right {
+	height: 45px;
+	width: 47px;
+	margin: 4px;
+	transition: background-color 0.2s;
+	color: transparent;
+	transform: rotate(90deg);
+}
+.lang-key {
+	width: 49px;
+}
+.text-label {
+	margin-bottom: 10px;
+	font-size: 35px;
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: 0.2s;
+}
+.key:hover {
+	background: rgba(160, 93, 180, 0.2);
+}
+.key:active {
+	border: 2px solid rgb(128, 0, 143);
+	background: #faf102;
+	color: rgb(230, 1, 255);
+	transition: 0.1s;
+	svg {
+		filter: invert(29%) sepia(100%) saturate(6332%) hue-rotate(286deg) brightness(105%) contrast(125%);
+	}
+}
+.hidden {
+	display: none;
+	transition: 0.2s;
+}
+.caps-lock_key--active {
+	background: rgba(36, 22, 40, 0.2);
+}
+.key--hidden {
+	background: rgba(0, 0, 0, 0.8);
+}
+.key--active {
+	border: 2px solid rgb(128, 0, 143);
+	background: #faf102;
+	color: rgb(230, 1, 255);
+	transition: 0.1s;
+	svg {
+		filter: invert(29%) sepia(100%) saturate(6332%) hue-rotate(286deg) brightness(105%) contrast(125%);
+	}
+}
