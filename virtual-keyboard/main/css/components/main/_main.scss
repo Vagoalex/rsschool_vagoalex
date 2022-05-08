@@ -10,25 +10,7 @@ video {
 	object-fit: cover;
 	z-index: -100;
 }
-.message {
-	position: absolute;
-	top: 2%;
-	left: 2%;
-	align-items: center;
 
-	&__desk {
-		padding: 5px;
-		height: 65px;
-		width: 580px;
-		background: #121a27;
-		border-radius: 12px;
-		font-size: 14px;
-		border: groove 1px transparent;
-		color: #faf102;
-		text-transform: uppercase;
-		font-weight: 700;
-	}
-}
 .video-mute {
 	position: absolute;
 	top: 2%;
@@ -57,7 +39,7 @@ video {
 .wrapper-text__helper {
 	position: absolute;
 	top: 0;
-	right: 163px;
+	right: 0;
 	color: #faf102;
 	text-shadow: 2px 2px 2px pink;
 	font-size: 17px;
@@ -107,7 +89,7 @@ video {
 	user-select: none;
 	transition: bottom 1.2s;
 	overflow: hidden;
-	border-radius: 17px;
+	border-radius: 23px;
 	order: 2;
 }
 .keyboard--hidden {
@@ -226,7 +208,6 @@ video {
 	background: rgba(36, 22, 40, 0.2);
 }
 .key--hidden {
-	background: rgba(0, 0, 0, 0.8);
 }
 .key--active {
 	border: 2px solid rgb(128, 0, 143);

@@ -9,13 +9,11 @@ export function createWindowElements() {
 					<source src="../assets/cyberbg.mp4"  type="video/mp4"></source>
 				</video>
 			</div>
-			<div class="message">
-			<p class="message__desk">Добрый день, уважаемый проверяющий! К сожалению, нужно было уехать <br />и я не успел доделать приложуху :(<br />Работает только вывод через клик по кнопкам</p></div>
 			<div id="videoMute" class="video-mute">
 			<button class="video-mute__btn">включить музон</button>
 			</div>
 			<div class="wrapper-text">
-			<div class="wrapper-text__helper">Нажми в поле ввода :)</div>
+			<div class="wrapper-text__helper">Нажми на поле ввода или введи символ :)</div>
 				<textarea class="text" placeholder="Hello world!"></textarea>
 			</div>`
 	);
@@ -70,53 +68,97 @@ const Keyboard = {
 
 		window.addEventListener('keydown', e => {
 			const { keys } = this.elements;
-			const position = document.querySelector('.text').selectionStart;
+			const text = document.querySelector('.text');
+			const position = text.selectionStart;
 			const first = this.props.value.slice(0, position);
 			const second = this.props.value.slice(position);
-			// console.log(e);
+			text.focus();
 			keys.forEach(key => {
 				if (e.code === `Key${key.textContent.toUpperCase()}`) {
 					key.classList.add('key--active');
 					this.props.value = first + key.textContent + second;
-				} else if (e.code === 'CapsLock' && key.classList.contains('caps-lock_key')) {
+				}
+				if (e.key === key.textContent && e.key !== 'Alt' && e.key !== 'Shift') {
+					key.classList.add('key--active');
+					this.props.value = `${first}${key.textContent}${second}`;
+				}
+				if (e.code === 'CapsLock' && key.classList.contains('caps-lock_key')) {
 					key.classList.add('key--active');
 					key.click();
-				} else if (e.code === 'ShiftLeft' && key.classList.contains('shift-left_key')) {
-					key.classList.add('key--active');
-					const rightShift = key.classList.contains('shift-right_key');
-					rightShift.classList.remove('key--active');
-					key.click();
-				} else if (e.code === 'ShiftRight' && key.classList.contains('shift-right_key')) {
-					key.classList.add('key--active');
-					const leftShift = key.classList.contains('shift-left_key');
-					leftShift.classList.remove('key--active');
-					key.click();
-				} else if (e.code === 'Enter' && key.classList.contains('enter_key')) {
+				}
+				if (e.code === 'Enter' && key.classList.contains('enter_key')) {
 					key.classList.add('key--active');
 					this.props.value = `${first}\n${second}`;
-				} else if (e.code === 'Backspace' && key.classList.contains('backspace_key')) {
+				}
+				if (e.code === 'ControlLeft' && key.classList.contains('ctrl-left_key') && e.code === 'AltLeft' && key.classList.contains('alt-left_key')) {
+					console.log('translate');
+				}
+				if (e.code === 'ShiftLeft' && key.classList.contains('shift-left_key')) {
+					key.classList.add('key--active');
+					this.shiftOn();
+					key.classList.toggle('caps-lock_key--active', this.props.shift);
+				}
+				if (e.code === 'ShiftRight' && key.classList.contains('shift-right_key')) {
+					key.classList.add('key--active');
+					key.click();
+				}
+				if (e.code === 'Enter' && key.classList.contains('enter_key')) {
+					key.classList.add('key--active');
+					this.props.value = `${first}\n${second}`;
+				}
+				if (e.code === 'Backspace' && key.classList.contains('backspace_key')) {
 					key.classList.add('key--active');
 					this.props.value = first.substring(0, first.length - 1) + second;
-				} else if (e.code === 'Tab' && key.textContent === 'Tab') {
+				}
+				if (e.code === 'Tab' && key.textContent === 'Tab') {
+					e.preventDefault();
+					key.classList.add('key--active');
+					key.click();
+				}
+				if (e.code === 'Space' && key.classList.contains('space_key')) {
 					key.classList.add('key--active');
 					this.props.value = `${first} ${second}`;
-				} else if (e.code === 'Space' && key.classList.contains('space_key')) {
+				}
+				if (e.code === 'Backslash' && key.classList.contains('splash_key')) {
 					key.classList.add('key--active');
-					this.props.value = `${first} ${second}`;
-				} else if (
-					(e.code === 'ArrowLeft' && key.classList.contains('arrow_left')) ||
-					(e.code === 'ArrowRight' && key.classList.contains('arrow_right')) ||
-					(e.key === '/' && key.textContent === '?') ||
-					e.key === key.textContent
-				) {
+					this.props.value = `${first}${key.textContent}${second}`;
+				}
+				if (e.code === 'ArrowLeft' && key.classList.contains('arrow_left')) {
 					key.classList.add('key--active');
-					this.props.value = first + key.textContent + second;
+				}
+				if (e.code === 'ArrowRight' && key.classList.contains('arrow_right')) {
+					key.classList.add('key--active');
+				}
+				if (e.code === 'ArrowUp' && key.classList.contains('arrow_up')) {
+					key.classList.add('key--active');
+				}
+				if (e.code === 'ArrowDown' && key.classList.contains('arrow_down')) {
+					key.classList.add('key--active');
+				}
+				if (e.code === 'AltLeft' && key.classList.contains('alt-left_key')) {
+					e.preventDefault();
+					key.classList.add('key--active');
+				}
+				if (e.code === 'AltRight' && key.classList.contains('alt-right_key')) {
+					e.preventDefault();
+					key.classList.add('key--active');
+				}
+				if (e.code === 'ControlLeft' && key.classList.contains('ctrl-left_key')) {
+					key.classList.add('key--active');
+				}
+				if (e.code === 'ControlRight' && key.classList.contains('ctrl-right_key')) {
+					key.classList.add('key--active');
 				}
 			});
 		});
+
 		window.addEventListener('keyup', () => {
 			const { keys } = this.elements;
-			keys.forEach(key => key.classList.remove('key--active'));
+			keys.forEach(key => {
+				if (key.classList.contains('key--active')) {
+					key.classList.remove('key--active');
+				}
+			});
 		});
 	},
 
@@ -178,12 +220,12 @@ const Keyboard = {
 			'ShiftRight',
 			'Up',
 			'Eng/Rus',
-			'Ctrl',
+			'CtrlLeft',
 			'Done',
-			'Alt',
+			'AltLeft',
 			'Space',
-			'Alt',
-			'Ctrl',
+			'AltRight',
+			'CtrlRight',
 			'Left',
 			'Bottom',
 			'Right',
@@ -194,7 +236,7 @@ const Keyboard = {
 			keyElem.classList.add('key');
 			keyElem.setAttribute('type', 'button');
 
-			const svg = `	<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+			const svgArrow = `	<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
 							<path style="fill: #faf102" d="M14.15 30.45 11.7 28 24 15.7 36.3 28 33.85 30.45 24 20.6Z" />
 						</svg>`;
 
@@ -308,21 +350,32 @@ const Keyboard = {
 						const second = this.props.value.slice(position);
 
 						textarea.focus();
-						this.props.value = `${first} ${second}`;
+						this.props.value = `${first}\t${second}`;
 						this.triggerEvent('oninput');
 					});
 					break;
-				case 'Ctrl':
-					keyElem.classList.add('key--special');
+				case 'CtrlLeft':
+					keyElem.classList.add('key--special', 'ctrl-left_key');
 					keyElem.textContent = 'Ctrl';
 					break;
-				case 'Alt':
-					keyElem.classList.add('key--special');
+				case 'CtrlRight':
+					keyElem.classList.add('key--special', 'ctrl-right_key');
+					keyElem.textContent = 'Ctrl';
+					break;
+				case 'AltLeft':
+					keyElem.classList.add('key--special', 'alt-left_key');
+					keyElem.textContent = 'Alt';
+					break;
+				case 'AltRight':
+					keyElem.classList.add('key--special', 'alt-right_key');
 					keyElem.textContent = 'Alt';
 					break;
 				case 'Done':
 					keyElem.classList.add('key--special', 'key--hidden');
-					keyElem.textContent = 'HIDE@';
+					keyElem.insertAdjacentHTML(
+						'afterbegin',
+						`<svg xmlns="http://www.w3.org/2000/svg" height="40" width="40"><path style="fill: #faf102" d="M33.667 28.667H6.333Q4.833 28.667 3.75 27.604Q2.667 26.542 2.667 25V7.708Q2.667 6.208 3.75 5.125Q4.833 4.042 6.333 4.042H33.667Q35.167 4.042 36.25 5.125Q37.333 6.208 37.333 7.708V25Q37.333 26.542 36.25 27.604Q35.167 28.667 33.667 28.667ZM18.625 12.625H21.375V9.833H18.625ZM18.625 17.75H21.375V15H18.625ZM13.542 12.625H16.333V9.833H13.542ZM13.542 17.75H16.333V15H13.542ZM8.417 17.75H11.208V15H8.417ZM8.417 12.625H11.208V9.833H8.417ZM13.458 22.792H26.583V20.042H13.458ZM23.708 17.75H26.5V15H23.708ZM23.708 12.625H26.5V9.833H23.708ZM28.792 17.75H31.583V15H28.792ZM28.792 12.625H31.583V9.833H28.792ZM20 38.958 13.125 32.042H26.875Z"/></svg>`
+					);
 
 					keyElem.addEventListener('click', () => {
 						this.close();
@@ -330,25 +383,19 @@ const Keyboard = {
 					});
 					break;
 				case 'Up':
-					keyElem.insertAdjacentHTML('afterbegin', svg);
+					keyElem.insertAdjacentHTML('afterbegin', svgArrow);
 					keyElem.classList.add('key--special', 'arrow_up');
 
 					keyElem.addEventListener('click', () => {
-						console.log('up');
-						// const textarea = document.querySelector('.textarea');
-						// textarea.focus();
-						// if (textarea.selectionStart === 0) {
-						// 	textarea.selectionStart = 0;
-						// 	textarea.selectionEnd = textarea.selectionStart;
-						// } else {
-						// 	textarea.selectionStart -= 1;
-						// 	textarea.selectionEnd = textarea.selectionStart;
-						// }
+						const textarea = document.querySelector('.text');
+						textarea.focus();
+						textarea.selectionStart = 0;
+						textarea.selectionEnd = textarea.selectionStart;
 					});
 
 					break;
 				case 'Left':
-					keyElem.insertAdjacentHTML('afterbegin', svg);
+					keyElem.insertAdjacentHTML('afterbegin', svgArrow);
 					keyElem.classList.add('key--special', 'arrow_left');
 
 					keyElem.addEventListener('click', () => {
@@ -364,7 +411,7 @@ const Keyboard = {
 					});
 					break;
 				case 'Right':
-					keyElem.insertAdjacentHTML('afterbegin', svg);
+					keyElem.insertAdjacentHTML('afterbegin', svgArrow);
 					keyElem.classList.add('key--special', 'arrow_right');
 
 					keyElem.addEventListener('click', () => {
@@ -375,20 +422,14 @@ const Keyboard = {
 					});
 					break;
 				case 'Bottom':
-					keyElem.insertAdjacentHTML('afterbegin', svg);
+					keyElem.insertAdjacentHTML('afterbegin', svgArrow);
 					keyElem.classList.add('key--special', 'arrow_down');
 
 					keyElem.addEventListener('click', () => {
 						console.log('bottom');
-						// const textarea = document.querySelector('.text');
-						// textarea.focus();
-						// if (textarea.selectionStart === 0) {
-						// 	textarea.selectionStart = 0;
-						// 	textarea.selectionEnd = textarea.selectionStart;
-						// } else {
-						// 	textarea.selectionStart -= 1;
-						// 	textarea.selectionEnd = textarea.selectionStart;
-						// }
+						const textarea = document.querySelector('.text');
+						textarea.focus();
+						textarea.selectionStart = textarea.textContent.length - 1;
 					});
 					break;
 
@@ -525,7 +566,7 @@ const Keyboard = {
 		];
 
 		document.querySelectorAll('button').forEach(key => {
-			key.classList.remove('keyboard__key--active');
+			key.classList.remove('key--active');
 			if (this.props.EnRu) {
 				if (langEn.indexOf(key.textContent) > -1) {
 					key.textContent = langRu[langEn.indexOf(key.textContent)];
