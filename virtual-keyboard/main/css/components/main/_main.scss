@@ -17,6 +17,7 @@ video {
 	right: 2%;
 
 	&__btn {
+		font-family: 'Marske', sans-serif;
 		height: 40px;
 		width: 240px;
 		background: #121a27;
@@ -31,12 +32,29 @@ video {
 		}
 	}
 }
+.message-window {
+	position: absolute;
+	top: 2%;
+	left: 2%;
+	color: #faf102;
+	font-family: 'Marske', sans-serif;
+	font-size: 16px;
+}
+.message-lang {
+	position: absolute;
+	top: 5%;
+	left: 2%;
+	color: #faf102;
+	font-family: 'Marske', sans-serif;
+	font-size: 16px;
+}
 .wrapper-text {
 	position: fixed;
 	margin: auto;
 	top: calc(100% - 720px);
 }
 .wrapper-text__helper {
+	font-family: 'Marske', sans-serif;
 	position: absolute;
 	top: 0;
 	right: 0;

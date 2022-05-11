@@ -12,6 +12,8 @@ export function createWindowElements() {
 			<div id="videoMute" class="video-mute">
 			<button class="video-mute__btn">включить музон</button>
 			</div>
+			<div class="message-window">Данное приложение сделано на Windows OS</div>
+			<div class="message-lang">Переключение языка only Alt + Shift.<br /> Shift + Alt не работает :(</div>
 			<div class="wrapper-text">
 			<div class="wrapper-text__helper">Нажми на поле ввода или введи символ :)</div>
 				<textarea class="text" placeholder="Hello world!"></textarea>
@@ -35,6 +37,7 @@ const Keyboard = {
 		capsLock: false,
 		shift: false,
 		EnRu: false,
+		keydowned: false,
 	},
 
 	init() {
@@ -68,95 +71,109 @@ const Keyboard = {
 
 		window.addEventListener('keydown', e => {
 			const { keys } = this.elements;
+			const { altKey, shiftKey, code, key } = e;
 			const text = document.querySelector('.text');
 			const position = text.selectionStart;
 			const first = this.props.value.slice(0, position);
 			const second = this.props.value.slice(position);
 			text.focus();
-			keys.forEach(key => {
-				if (e.code === `Key${key.textContent.toUpperCase()}`) {
-					key.classList.add('key--active');
-					this.props.value = first + key.textContent + second;
+
+			// Switch language
+			if ((shiftKey && altKey) || (altKey && shiftKey) || (code === 'ShiftLeft' && altKey)) {
+				const langKey = document.querySelector('.lang-key');
+				this.changeLanguage();
+				langKey.textContent = this.props.EnRu ? 'Rus' : 'Eng';
+			}
+
+			keys.forEach(elem => {
+				if (code === `Key${elem.textContent.toUpperCase()}`) {
+					elem.classList.add('key--active');
+					this.props.value = first + elem.textContent + second;
 				}
-				if (e.key === key.textContent && e.key !== 'Alt' && e.key !== 'Shift') {
-					key.classList.add('key--active');
-					this.props.value = `${first}${key.textContent}${second}`;
+				if (key === elem.textContent && key !== 'Alt' && key !== 'Shift' && key !== 'Tab') {
+					elem.classList.add('key--active');
+					this.props.value = `${first}${elem.textContent}${second}`;
 				}
-				if (e.code === 'CapsLock' && key.classList.contains('caps-lock_key')) {
-					key.classList.add('key--active');
-					key.click();
+				if (code === 'CapsLock' && elem.classList.contains('caps-lock_key')) {
+					elem.classList.add('key--active');
+					elem.click();
 				}
-				if (e.code === 'Enter' && key.classList.contains('enter_key')) {
-					key.classList.add('key--active');
+				if (code === 'Enter' && elem.classList.contains('enter_key')) {
+					elem.classList.add('key--active');
 					this.props.value = `${first}\n${second}`;
 				}
-				if (e.code === 'ControlLeft' && key.classList.contains('ctrl-left_key') && e.code === 'AltLeft' && key.classList.contains('alt-left_key')) {
-					console.log('translate');
-				}
-				if (e.code === 'ShiftLeft' && key.classList.contains('shift-left_key')) {
-					key.classList.add('key--active');
+				if (code === 'ShiftLeft' && elem.classList.contains('shift-left_key')) {
+					elem.classList.add('key--active');
 					this.shiftOn();
-					key.classList.toggle('caps-lock_key--active', this.props.shift);
 				}
-				if (e.code === 'ShiftRight' && key.classList.contains('shift-right_key')) {
-					key.classList.add('key--active');
-					key.click();
+				if (code === 'ShiftRight' && elem.classList.contains('shift-right_key')) {
+					elem.classList.add('key--active');
+					this.shiftOn();
 				}
-				if (e.code === 'Enter' && key.classList.contains('enter_key')) {
-					key.classList.add('key--active');
+				if (code === 'Enter' && elem.classList.contains('enter_key')) {
+					elem.classList.add('key--active');
 					this.props.value = `${first}\n${second}`;
 				}
-				if (e.code === 'Backspace' && key.classList.contains('backspace_key')) {
-					key.classList.add('key--active');
+				if (code === 'Backspace' && elem.classList.contains('backspace_key')) {
+					elem.classList.add('key--active');
 					this.props.value = first.substring(0, first.length - 1) + second;
 				}
-				if (e.code === 'Tab' && key.textContent === 'Tab') {
+				if (code === 'Tab' && elem.textContent === 'Tab') {
 					e.preventDefault();
-					key.classList.add('key--active');
-					key.click();
+					elem.classList.add('key--active');
+					elem.click();
 				}
-				if (e.code === 'Space' && key.classList.contains('space_key')) {
-					key.classList.add('key--active');
+				if (code === 'Space' && elem.classList.contains('space_key')) {
+					elem.classList.add('key--active');
 					this.props.value = `${first} ${second}`;
 				}
-				if (e.code === 'Backslash' && key.classList.contains('splash_key')) {
-					key.classList.add('key--active');
-					this.props.value = `${first}${key.textContent}${second}`;
+				if (code === 'Backslash' && elem.classList.contains('splash_key')) {
+					elem.classList.add('key--active');
+					this.props.value = `${first}${elem.textContent}${second}`;
 				}
-				if (e.code === 'ArrowLeft' && key.classList.contains('arrow_left')) {
-					key.classList.add('key--active');
+				if (code === 'ArrowLeft' && elem.classList.contains('arrow_left')) {
+					elem.classList.add('key--active');
 				}
-				if (e.code === 'ArrowRight' && key.classList.contains('arrow_right')) {
-					key.classList.add('key--active');
+				if (code === 'ArrowRight' && elem.classList.contains('arrow_right')) {
+					elem.classList.add('key--active');
 				}
-				if (e.code === 'ArrowUp' && key.classList.contains('arrow_up')) {
-					key.classList.add('key--active');
+				if (code === 'ArrowUp' && elem.classList.contains('arrow_up')) {
+					elem.classList.add('key--active');
 				}
-				if (e.code === 'ArrowDown' && key.classList.contains('arrow_down')) {
-					key.classList.add('key--active');
+				if (code === 'ArrowDown' && elem.classList.contains('arrow_down')) {
+					elem.classList.add('key--active');
 				}
-				if (e.code === 'AltLeft' && key.classList.contains('alt-left_key')) {
+				if (code === 'AltLeft' && elem.classList.contains('alt-left_key')) {
 					e.preventDefault();
-					key.classList.add('key--active');
+					elem.classList.add('key--active');
 				}
-				if (e.code === 'AltRight' && key.classList.contains('alt-right_key')) {
+				if (code === 'AltRight' && elem.classList.contains('alt-right_key')) {
 					e.preventDefault();
-					key.classList.add('key--active');
+					elem.classList.add('key--active');
 				}
-				if (e.code === 'ControlLeft' && key.classList.contains('ctrl-left_key')) {
-					key.classList.add('key--active');
+				if (code === 'ControlLeft' && elem.classList.contains('ctrl-left_key')) {
+					elem.classList.add('key--active');
 				}
-				if (e.code === 'ControlRight' && key.classList.contains('ctrl-right_key')) {
-					key.classList.add('key--active');
+				if (code === 'ControlRight' && elem.classList.contains('ctrl-right_key')) {
+					elem.classList.add('key--active');
 				}
 			});
 		});
 
-		window.addEventListener('keyup', () => {
+		window.addEventListener('keyup', e => {
 			const { keys } = this.elements;
-			keys.forEach(key => {
-				if (key.classList.contains('key--active')) {
-					key.classList.remove('key--active');
+			const { code } = e;
+			keys.forEach(elem => {
+				if (elem.classList.contains('key--active')) {
+					elem.classList.remove('key--active');
+				}
+				if (code === 'ShiftLeft' && elem.classList.contains('shift-left_key')) {
+					elem.classList.remove('key--active');
+					this.shiftOff();
+				}
+				if (code === 'ShiftRight' && elem.classList.contains('shift-right_key')) {
+					elem.classList.remove('key--active');
+					this.shiftOff();
 				}
 			});
 		});
@@ -302,26 +319,10 @@ const Keyboard = {
 				case 'ShiftLeft':
 					keyElem.classList.add('key--special', 'shift_key', 'shift-left_key');
 					keyElem.textContent = 'Shift';
-
-					keyElem.addEventListener('click', () => {
-						const textarea = document.querySelector('.text');
-						textarea.focus();
-
-						this.shiftOn();
-						keyElem.classList.toggle('caps-lock_key--active', this.props.shift);
-					});
 					break;
 				case 'ShiftRight':
 					keyElem.classList.add('key--special', 'shift_key', 'shift-right_key');
 					keyElem.textContent = 'Shift';
-
-					keyElem.addEventListener('click', () => {
-						const textarea = document.querySelector('.text');
-						textarea.focus();
-
-						this.shiftOn();
-						keyElem.classList.toggle('caps-lock_key--active', this.props.shift);
-					});
 					break;
 				case 'Eng/Rus':
 					keyElem.classList.add('key--special', 'lang-key');
@@ -332,12 +333,22 @@ const Keyboard = {
 						textarea.focus();
 						this.changeLanguage();
 						keyElem.textContent = this.props.EnRu ? 'Rus' : 'Eng';
-						keyElem.classList.toggle(this.props.EnRu);
 					});
 					break;
 				case '\\':
 					keyElem.classList.add('splash_key');
 					keyElem.textContent = '\\';
+
+					keyElem.addEventListener('click', () => {
+						const textarea = document.querySelector('.text');
+						const position = textarea.selectionStart;
+						const first = this.props.value.slice(0, position);
+						const second = this.props.value.slice(position);
+
+						textarea.focus();
+						this.props.value = `${first}\\${second}`;
+						this.triggerEvent('oninput');
+					});
 					break;
 				case 'Tab':
 					keyElem.classList.add('key--special', 'tab_key');
@@ -489,7 +500,6 @@ const Keyboard = {
 	},
 
 	changeLanguage() {
-		if (this.props.shift) this.shiftOn();
 		if (this.props.capsLock) this.toggleCapsLock();
 		this.props.EnRu = !this.props.EnRu;
 
@@ -529,7 +539,6 @@ const Keyboard = {
 			'?',
 		];
 		const langRu = [
-			'ё',
 			'й',
 			'ц',
 			'у',
@@ -592,44 +601,53 @@ const Keyboard = {
 	},
 
 	shiftOn() {
-		this.props.shift = !this.props.shift;
+		this.props.shift = true;
 
-		const defaultItemEn = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '?'];
-		const shiftItemEn = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '/'];
-		const defaultItemRU = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\\', '.'];
+		const defaultItemEn = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '/'];
+		const shiftItemEn = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?'];
+		const defaultItemRu = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\\', '.'];
 		const shiftItemRu = ['!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '/', ','];
 
 		document.querySelectorAll('button').forEach(key => {
-			if (this.props.shift && this.props.EnRu === false) {
-				if (key.textContent.charCodeAt(0) > 64 && key.textContent.charCodeAt(0) < 91 && !key.classList.contains('key--special')) {
-					key.textContent = key.textContent.toLowerCase();
-				} else if (key.textContent.charCodeAt(0) > 96 && key.textContent.charCodeAt(0) < 123 && !key.classList.contains('key--special')) {
-					key.textContent = key.textContent.toUpperCase();
-				} else if (defaultItemEn.indexOf(key.textContent) > -1) {
-					key.textContent = shiftItemEn[defaultItemEn.indexOf(key.textContent)];
-				}
-			} else if (this.props.EnRu === false) {
-				if (key.textContent.charCodeAt(0) > 64 && key.textContent.charCodeAt(0) < 91 && !key.classList.contains('key--special')) {
-					key.textContent = key.textContent.toLowerCase();
-				} else if (key.textContent.charCodeAt(0) > 96 && key.textContent.charCodeAt(0) < 123 && !key.classList.contains('key--special')) {
-					key.textContent = key.textContent.toUpperCase();
-				} else if (shiftItemEn.indexOf(key.textContent) > -1) {
-					key.textContent = defaultItemEn[shiftItemEn.indexOf(key.textContent)];
-				}
-			} else if (this.props.shift && this.props.EnRu === true) {
-				if (key.textContent.charCodeAt(0) > 1039 && key.textContent.charCodeAt(0) < 1072 && !key.classList.contains('key--special')) {
-					key.textContent = key.textContent.toLowerCase();
-				} else if (key.textContent.charCodeAt(0) > 1071 && key.textContent.charCodeAt(0) < 1104 && !key.classList.contains('key--special')) {
-					key.textContent = key.textContent.toUpperCase();
-				} else if (defaultItemRU.indexOf(key.textContent) > -1) {
-					key.textContent = shiftItemRu[defaultItemRU.indexOf(key.textContent)];
-				}
-			} else if (key.textContent.charCodeAt(0) > 1039 && key.textContent.charCodeAt(0) < 1072 && !key.classList.contains('key--special')) {
-				key.textContent = key.textContent.toLowerCase();
-			} else if (key.textContent.charCodeAt(0) > 1071 && key.textContent.charCodeAt(0) < 1104 && !key.classList.contains('key--special')) {
+			// for Eng
+			if (!this.props.capsLock && this.props.shift && this.props.EnRu === false && !key.classList.contains('key--special')) {
 				key.textContent = key.textContent.toUpperCase();
-			} else if (shiftItemRu.indexOf(key.textContent) > -1) {
-				key.textContent = defaultItemRU[shiftItemRu.indexOf(key.textContent)];
+			}
+			if (defaultItemEn.indexOf(key.textContent) > -1 && this.props.EnRu === false) {
+				key.textContent = shiftItemEn[defaultItemEn.indexOf(key.textContent)];
+			}
+			// for Rus
+			if (!this.props.capsLock && this.props.shift && this.props.EnRu === true && !key.classList.contains('key--special')) {
+				key.textContent = key.textContent.toUpperCase();
+			}
+			if (defaultItemRu.indexOf(key.textContent) > -1 && this.props.EnRu === true) {
+				key.textContent = shiftItemRu[defaultItemRu.indexOf(key.textContent)];
+			}
+		});
+	},
+
+	shiftOff() {
+		this.props.shift = false;
+
+		const defaultItemEn = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '/'];
+		const shiftItemEn = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?'];
+		const defaultItemRu = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\\', '.'];
+		const shiftItemRu = ['!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '/', ','];
+
+		document.querySelectorAll('button').forEach(key => {
+			// for Eng
+			if (!this.props.capsLock && !this.props.shift && this.props.EnRu === false && !key.classList.contains('key--special')) {
+				key.textContent = key.textContent.toLowerCase();
+			}
+			if (shiftItemEn.indexOf(key.textContent) > -1 && this.props.EnRu === false) {
+				key.textContent = defaultItemEn[shiftItemEn.indexOf(key.textContent)];
+			}
+			// for Rus
+			if (!this.props.capsLock && !this.props.shift && this.props.EnRu === true && !key.classList.contains('key--special')) {
+				key.textContent = key.textContent.toLowerCase();
+			}
+			if (shiftItemRu.indexOf(key.textContent) > -1 && this.props.EnRu === true) {
+				key.textContent = defaultItemRu[shiftItemRu.indexOf(key.textContent)];
 			}
 		});
 	},
