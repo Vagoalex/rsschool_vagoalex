@@ -1,0 +1,30 @@
+html {
+	scroll-behavior: smooth;
+}
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: normal;
+	letter-spacing: 0.06em;
+	min-width: 320px;
+	position: relative;
+	overflow-x: hidden;
+	color: #000;
+	transition: 0.2s;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	flex-direction: column;
+	margin: 0 10px;
+}
+.wrapper {
+	max-width: 1280px;
+	padding: 0 40px;
+	margin: 0 auto;
+}
